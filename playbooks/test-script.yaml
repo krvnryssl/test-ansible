@@ -1,0 +1,22 @@
+---
+- name: Create  and run a test script
+  hosts: webservers
+  
+  tasks:
+  - name: Create test script
+    copy:
+      dest: /tmp/test-script.sh
+      content: |
+        #!/bin/bash
+        echo "Hello from ansible on $(hostname)"
+      mode: '0755'
+
+  - name: Execute test script
+    command: /tmp/test-script.sh
+    register: script_output
+
+  - name: Show script output
+    debug:
+      msg: "{{ script_output.stdout }}"
+
+

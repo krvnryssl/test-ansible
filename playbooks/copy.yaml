@@ -1,0 +1,15 @@
+---
+- name: test copy file
+  hosts: extservers
+
+  tasks:
+    - name: copy file
+      become: true
+      become_user: krvnryssl
+      copy:
+        src: /home/krvnryssl/test.txt
+        dest: /home/krvnryssl/test.txt
+        user: krvnryssl
+        group: krvnryssl
+        mode: 0664
+
