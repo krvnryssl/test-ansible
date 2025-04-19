@@ -1,0 +1,25 @@
+---
+- name: install firewalld to sample app host
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: Install firewalld
+      apt:
+        name: firewalld
+        state: present
+
+    - name: start firewalld
+      service:
+        name: firewalld
+        state: started
+
+    - name: Allowing http port
+      firewalld: 
+        service: http
+        permanent: yes    
+        state: enabled
+    - name: restart firewalld
+      service:
+        name: firewalld
+        state: reloaded

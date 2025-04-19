@@ -1,0 +1,8 @@
+---
+- name: ping host
+  hosts: all
+  remote_user: svc-test
+
+  tasks: 
+  - name: task1 ping host
+    ping: 
