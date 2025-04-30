@@ -1,0 +1,17 @@
+---
+- name: HTTP status check
+  hosts: webservers
+  become: true
+    
+  tasks:
+  - name: start http
+    command: systemctl start apache2
+    tags: http-start
+        
+  - name: stop http
+    command: systemctl stop apache2
+    tags:  http-stop
+
+  - name: reload http
+    command: systemctl reload apache2
+    tags: http-reload

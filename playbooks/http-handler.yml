@@ -1,0 +1,28 @@
+- name: Apache modify configuration
+  hosts: webservers
+  become: true
+  tasks:
+
+    - name: Ensure apache is latest version
+      apt:
+        name: apache2
+        state: latest
+
+    - name: Update Apache index.html to Hello World
+      copy:                 
+        content: "Hello World\n"
+        dest: /var/www/html/index.html    
+        mode: '0644' 
+      notify:   
+      - Restart apache  
+
+    - name: Ensure apache is running 
+      service:             
+        name: apache2  
+        state: started    
+  
+  handlers:
+      - name: Restart apache
+        service:
+          name: apache2
+          state: restarted 

@@ -1,13 +1,12 @@
 ---
 - name: Set-up test webapp
   hosts: webservers
-  remote_user: svc-test
+  become: true
   tasks:
   - name: Connection test
     ping:
 
   - name: install apache
-    become: true
     apt: 
       name: apache2
       state: present

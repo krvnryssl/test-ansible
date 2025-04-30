@@ -1,0 +1,14 @@
+---
+- name: webserver setup
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: web server status check -  Ubuntu
+      command: systemctl status apache2
+      register: status
+      when:  ansible_os_family == "Debian"
+
+    - name: debug web server status
+      debug:
+        msg: "{{ status.stdout_lines }}"

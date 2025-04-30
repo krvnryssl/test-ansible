@@ -1,0 +1,25 @@
+---
+- name: Create directory and download packages
+  hosts: webservers
+  remote_user: krvnryssl
+    
+  tasks:
+  - name: Create tomcat directory
+    file: 
+      path: /opt/tomcat
+      state: directory
+      owner: root
+      group: root
+      mode: 0755
+    
+
+  - name: Install tomcat package using get_url
+    become: true
+    get_url: 
+      url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.40/bin/apache-tomcat-10.1.40.tar.gz
+      dest: /opt/tomcat
+      validate_certs: no
+      owner: svc-test
+      group: svc-test
+      mode: 0755
+

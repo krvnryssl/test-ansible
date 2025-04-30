@@ -1,0 +1,16 @@
+---
+- name: HTTP status check
+  hosts: webservers
+  become: true
+  vars:
+        packs: apache2
+    
+    
+  tasks:
+  - name: view {{ packs }} status
+    command: systemctl status "{{ packs }}"
+    register: apachestatus
+        
+  - name: view status
+    debug: 
+      msg: "{{ apachestatus.stdout_lines }}"

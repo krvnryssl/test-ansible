@@ -1,0 +1,10 @@
+---
+- name: Full install
+  hosts: web-server-1
+  roles:
+      - fullinstall
+
+- name: Basic Install
+  hosts: web-server-2
+  roles:
+      - basicinstall

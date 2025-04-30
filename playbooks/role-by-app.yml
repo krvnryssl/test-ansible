@@ -1,0 +1,7 @@
+---
+- name: Install packages
+  hosts: webservers
+  roles:
+    - apache
+    - ntpd
+    - named

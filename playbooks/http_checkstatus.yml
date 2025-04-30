@@ -1,0 +1,13 @@
+---
+- name: HTTP status check
+  hosts: webservers
+  become: true
+    
+  tasks:
+  - name: view http status
+    command: systemctl status apache2
+    register: apachestatus
+        
+  - name: view status
+    debug: 
+      msg: "{{ apachestatus.stdout_lines }}"

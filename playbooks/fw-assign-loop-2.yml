@@ -1,0 +1,29 @@
+---
+- name: Enable service on firewalld
+  hosts: webservers
+  become: true
+  
+  vars:
+      allow_ports: [ssh,http,zabbix-agent] 
+
+  tasks:
+  - name: Open port for http
+    firewalld:
+      service: "{{ item }}"
+      permanent: true
+      state: enabled
+      immediate: yes
+    with_items: "{{ allow_ports }}"
+    notify:
+      - Reload firewalld
+
+  - name: Ensure firewalld is running
+    service:  
+        name: firewalld  
+        state: started
+
+  handlers:
+    - name: Reload firwalld
+      service: 
+        name: firewalld
+        state: reloaded

@@ -1,0 +1,15 @@
+---
+- name: Verify packages
+  hosts: webservers
+  become: true
+  vars:
+    packages: [apache2, firewalld]  # Use correct package names for your OS
+
+  tasks:
+    - name: Ensure packages are installed
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{packages}}"
+      when: ansible_os_family == "Debian"
+
