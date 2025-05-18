@@ -1,0 +1,14 @@
+---
+- name: Install htop
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: Install htop
+      apt:
+        name: htop
+        state: present
+
+~                                                                                                       
+~                                                                                                       
+~                       

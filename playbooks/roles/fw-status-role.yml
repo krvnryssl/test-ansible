@@ -1,0 +1,7 @@
+---
+- name: Check firewalld Status
+  hosts: webservers
+  become: true
+
+  roles:
+    - fwstatus

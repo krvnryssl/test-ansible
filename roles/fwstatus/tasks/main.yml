@@ -1,0 +1,7 @@
+---
+- name: Ensure Firewalld is exist
+  service:
+      name: firewalld
+      state: started
+
+
